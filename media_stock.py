@@ -178,7 +178,7 @@ def record_delivery(root: Path, asset_id: str, recipient, channel, status, detai
 
 def list_events(root: Path, limit=25):
     db = connect(root)
-    rows = db.execute("SELECT * FROM delivery_events ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
+    rows = db.execute("SELECT * FROM delivery_events ORDER BY created_at DESC, event_id DESC LIMIT ?", (limit,)).fetchall()
     db.close()
     return rows
 
