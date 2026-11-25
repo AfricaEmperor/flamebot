@@ -1,14 +1,14 @@
 # MEDIA-STOCK-001 — Lightweight Asset Inventory & FlameBot Distribution Loop
 
 ## Mission
-Build a low-resource media catalog and a rights-gated staging/delivery loop for FlameBot. No media-server stack, no paid services, and no non-standard Python dependencies.
+Implement a low-resource media catalog and rights-gated staging/delivery loop for FlameBot. No media-server stack, no paid services, and no non-standard Python dependencies.
 
 ## Repository reconnaissance
 - Repository: AfricaEmperor/flamebot
 - Default branch: main
-- Initial repo: public, very small, README + requirements; current bot runtime source was not present in the inspected default-branch files.
-- GitHub permissions available to the connected integration: admin/maintain/push.
-- Therefore this implementation provides a tested inventory, search, rights gate, staging and delivery-audit interface; direct Telegram send wiring remains pending discovery of the deployed bot source.
+- Initial repo is very small; README and requirements were inspected. Bot runtime source was not present in the inspected default-branch paths.
+- Connected GitHub integration permissions: admin/maintain/push.
+- Implementation status: code committed to the feature branch; runtime execution and Telegram end-to-end delivery are not yet verified.
 
 ## Components
 - Python standard library only
@@ -39,7 +39,7 @@ media-stock/
 ## Quick start
 ```bash
 python media_stock.py --root ./media-stock init
-# Drop authorized-to-review media into inbox/ or library/
+# Drop media into inbox/ or library/
 python media_stock.py --root ./media-stock scan
 python media_stock.py --root ./media-stock search promo
 python media_stock.py --root ./media-stock rights MS-<ID> --status authorized --source internal --allow-distribution
@@ -59,16 +59,17 @@ python media_stock.py --root ./media-stock events
 - No automatic publishing during scan.
 - Scan inventories files; it does not authorize them.
 - Staging copies only authorized assets.
-- Telegram delivery is not implemented in this repo's current source because the deployed bot code was not found in the inspected files.
+- Telegram delivery is not implemented in the repository's inspected source because the deployed bot code was not found.
 
 ## Acceptance criteria
 - [x] No paid infrastructure
-- [x] Standard-library-only runtime
-- [x] Local SQLite database
-- [x] File inventory and dedupe
+- [x] Standard-library-only runtime design
+- [x] Local SQLite database design
+- [x] File inventory and dedupe implementation
 - [x] Search by asset ID/name/tag and media type
-- [x] Explicit rights authorization
-- [x] Rights-gated staging
-- [x] Delivery audit log interface
+- [x] Explicit rights authorization implementation
+- [x] Rights-gated staging implementation
+- [x] Delivery audit interface implementation
+- [ ] Local execution tests
 - [ ] Telegram send integration wired into deployed FlameBot runtime
 - [ ] End-to-end test with an actual Telegram chat
