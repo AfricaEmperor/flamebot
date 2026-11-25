@@ -2,19 +2,26 @@
 
 ## Overview
 
-FlameBot is a secure Telegram bot built on Python to fuse blockchain wallet hooks, trading automation, and emotional commerce triggers.
+FlameBot is a Telegram bot built on Python. This repository currently contains the initial project scaffold; deployed runtime code was not present during the Media Stock implementation audit.
 
-## Quickstart
+## Media Stock (MEDIA-STOCK-001)
 
-1. Clone the repo
-2. Rename .env.template to .env and add your secrets
-3. Install dependencies:
-   pip install -r requirements.txt
-4. Run the bot:
-   python flamebot.py
-5. Test commands: /start, /tip
+Lightweight local media inventory and rights-gated distribution staging. Uses Python standard library + SQLite, no paid services.
 
-## Extending
+```bash
+python media_stock.py --root ./media-stock init
+# Add files to media-stock/inbox or media-stock/library
+python media_stock.py --root ./media-stock scan
+python media_stock.py --root ./media-stock search promo
+# Explicitly authorize redistribution before staging:
+python media_stock.py --root ./media-stock rights MS-<ASSET_ID> --status authorized --source internal --allow-distribution
+python media_stock.py --root ./media-stock stage MS-<ASSET_ID> --recipient <telegram-user-id>
+python media_stock.py --root ./media-stock events
+```
+
+Unknown or restricted rights block staging. Scan only catalogs files; it does not grant distribution permission. See [MEDIA-STOCK-001.md](MEDIA-STOCK-001.md) for architecture and integration contract.
+
+## Original scaffold
 
 - Add wallet integration and real tips
 - Connect trading signals
@@ -22,6 +29,5 @@ FlameBot is a secure Telegram bot built on Python to fuse blockchain wallet hook
 
 ## Security
 
-- Keep .env secret
-- Use .gitignore
-
+- Keep secrets in environment files, never commit them.
+- Distribution requires explicit asset-level authorization.
